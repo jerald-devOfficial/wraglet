@@ -5,9 +5,23 @@ import CreatePost from './component/CreatePost';
 import Post from './component/Post';
 import { PostInterface } from '@/app/interfaces';
 import { useChannel } from 'ably/react';
+import * as Ably from 'ably';
+import { AblyProvider } from 'ably/react';
 
 import toast from 'react-hot-toast';
 import axios from 'axios';
+
+const FeedClient = ({ initialPosts }: { initialPosts: PostInterface[] }) => {
+  const client = new Ably.Realtime.Promise({
+    authUrl: '/api/token',
+    authMethod: 'POST'
+  });
+  return (
+    <AblyProvider client={client}>
+      <FeedBody initialPosts={initialPosts} />
+    </AblyProvider>
+  );
+};
 
 interface FeedBodyInterface {
   initialPosts: PostInterface[];
@@ -73,4 +87,4 @@ const FeedBody: FC<FeedBodyInterface> = ({ initialPosts }) => {
   );
 };
 
-export default FeedBody;
+export default FeedClient;
