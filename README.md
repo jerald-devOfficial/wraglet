@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Welcome to Wraglet 🚀
 
-## Getting Started
+Wraglet is an open-source social media platform designed to bring people together, facilitate meaningful connections, and encourage engaging conversations. Think of it as the love child of Facebook and Reddit, where short, impactful posts rule, upvotes are king, and genuine interactions flourish. Wraglet encourages brevity with a character limit of 800 for posts, channeling long-form content to the dedicated Blog section.
 
-First, run the development server:
+## Features 🌟
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Short and Sweet Posts:** Share your thoughts, updates, and ideas in concise posts of up to 800 characters.
+- **Upvotes and Likes:** Engage with posts using the upvote system inspired by Reddit, and show appreciation with traditional likes.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Blogging Platform:** Express yourself freely in the Blog section, where longer content finds a home.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Connect and Chat:** Add friends, follow interesting profiles, and initiate private conversations with ease.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How to Contribute 🤝
 
-## Learn More
+We welcome contributions from developers and enthusiasts like you to make Wraglet better every day. Here’s how you can get involved:
 
-To learn more about Next.js, take a look at the following resources:
+1. **Fork the Repository:** Start by forking the Wraglet repository to your own GitHub account.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Clone the Repository:** Clone the forked repository to your local machine using Git.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   git clone https://github.com/Wraglet/wraglet.git
+   ```
 
-## Deploy on Vercel
+3. **Set Up Your Development Environment:** Follow the setup instructions provided in the `DEVELOPMENT.md` file to get your development environment ready.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Pick an Issue:** Check out the [Issues](https://github.com/Wraglet/wraglet/issues) section for tasks that interest you. Feel free to create new issues if you identify areas of improvement.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. **Make Changes:** Work on the issue, add your improvements, and commit your changes. Be sure to follow the coding guidelines outlined in `CONTRIBUTING.md`.
+
+6. **Submit a Pull Request:** Once your changes are ready, submit a pull request to the main repository. Be descriptive about what your changes achieve and why they are necessary.
+
+7. **Engage:** Engage in discussions on existing issues, provide feedback, and help review pull requests from other contributors.
+
+## Community Guidelines 🌐
+
+- **Be Respectful:** Treat everyone with respect and kindness. We encourage a positive and inclusive atmosphere for all.
+
+- **Quality Contributions:** Ensure your contributions are well-tested, maintain code quality, and provide meaningful improvements.
+
+- **Collaborate:** Feel free to collaborate with other contributors. Together, we can achieve great things.
+
+## Get in Touch 📬
+
+Join our community and help shape the future of Wraglet! If you have questions, ideas, or just want to chat, you can reach us on [Discord](https://discord.gg/x9W97NmT) or [Facebook](https://www.facebook.com/wraglet).
+
+Let's build a thriving community together! 🚀
