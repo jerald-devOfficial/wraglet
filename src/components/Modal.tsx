@@ -1,4 +1,4 @@
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from '@headlessui/react';
 import React, { Fragment, ReactNode } from 'react';
 import { HiMiniXMark } from 'react-icons/hi2';
 
@@ -13,7 +13,7 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as='div' className='relative z-20' onClose={onClose}>
-        <Transition.Child
+        <TransitionChild
           as={Fragment}
           enter='ease-out duration-300'
           enterFrom='opacity-0'
@@ -23,11 +23,11 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
           leaveTo='opacity-0'
         >
           <div className='fixed inset-0 bg-white/40' />
-        </Transition.Child>
+        </TransitionChild>
 
         <div className='fixed inset-0 overflow-y-auto'>
           <div className='flex min-h-full items-center justify-center'>
-            <Transition.Child
+            <TransitionChild
               as={Fragment}
               enter='ease-out duration-300'
               enterFrom='opacity-0 scale-95'
@@ -36,14 +36,14 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
               leaveFrom='opacity-100 scale-100'
               leaveTo='opacity-0 scale-95'
             >
-              <Dialog.Panel className='w-full max-w-md transform overflow-visible rounded-md bg-white align-middle shadow-md transition-all'>
+              <DialogPanel className='w-full max-w-md transform overflow-visible rounded-md bg-white align-middle shadow-md transition-all'>
                 <div className='flex items-center justify-between border-b border-solid border-[#DFE4EA] w-full p-5'>
-                  <Dialog.Title
+                  <DialogTitle
                     as='h3'
                     className='text-lg font-medium leading-6 text-gray-900'
                   >
                     {title}
-                  </Dialog.Title>
+                  </DialogTitle>
 
                   <HiMiniXMark
                     className='cursor-pointer text-2xl hover:scale-125'
@@ -51,8 +51,8 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
                   />
                 </div>
                 <div className='flex flex-col w-full'>{children}</div>
-              </Dialog.Panel>
-            </Transition.Child>
+              </DialogPanel>
+            </TransitionChild>
           </div>
         </div>
       </Dialog>
