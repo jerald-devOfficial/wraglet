@@ -2,7 +2,7 @@ import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import dbConnect from '@/lib/dbConnect'
 import User, { UserDocument } from '@/models/User'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 
 // Extend the session user type
 declare module 'next-auth' {
