@@ -4,126 +4,61 @@ import dbConnect from '@/lib/dbConnect'
 import User, { UserDocument } from '@/models/User'
 import bcrypt from 'bcryptjs'
 
-// Extend the session user type
-declare module 'next-auth' {
-  interface Session {
-    user: {
-      _id: string
-      email?: string | null
-      firstName?: string | null
-      lastName?: string | null
-      dob?: Date | null
-      username?: string | null
-      gender?: string | null
-      bio?: string | null
-      pronoun?: string | null
-      profilePicture?: string | null
-      coverPhoto?: string | null
-    }
-  }
-}
-
-// Extend the JWT type
-declare module 'next-auth/jwt' {
-  interface JWT {
-    _id: string
-    firstName?: string
-    lastName?: string
-    email?: string | null
-    dob?: Date
-    username?: string
-    gender?: string
-    bio?: string
-    pronoun?: string
-    profilePicture?: string
-    coverPhoto?: string
-  }
-}
-
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
+      id: 'credentials',
       name: 'Credentials',
       credentials: {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials) {
+        // Check if the user exists.
         await dbConnect()
 
-        const user = await User.findOne({ email: credentials?.email }).select(
-          '+hashedPassword'
-        )
-        if (!user) {
-          throw new Error('No user found with the email')
-        }
+        const user = (await User.findOne({
+          email: credentials?.email?.toLowerCase()
+        }).lean()) as UserDocument | null
 
-        if (!credentials?.password || !user?.hashedPassword) {
-          throw new Error('Invalid password')
-        }
+        if (user) {
+          const isPasswordCorrect = await bcrypt.compare(
+            credentials!.password,
+            user.hashedPassword
+          )
 
-        const isValid = await bcrypt.compare(
-          credentials.password,
-          user.hashedPassword
-        )
-        if (!isValid) {
-          throw new Error('Invalid password')
-        }
+          if (isPasswordCorrect) {
+            // Cast user to UserDocument to access properties
+            const typedUser = user
 
-        return {
-          id: user._id, // Add the required 'id' property
-          email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          dob: user.dob,
-          username: user.username,
-          gender: user.gender,
-          bio: user.bio,
-          pronoun: user.pronoun,
-          profilePicture: user.profilePicture,
-          coverPhoto: user.coverPhoto
+            return {
+              id: typedUser._id.toString(), // convert ObjectId to string
+              firstName: typedUser.firstName,
+              lastName: typedUser.lastName,
+              email: typedUser.email,
+              dob: typedUser.dob,
+              username: typedUser.username,
+              gender: typedUser.gender,
+              bio: typedUser.bio,
+              pronoun: typedUser.pronoun,
+              profilePicture: typedUser.profilePicture,
+              coverPhoto: typedUser.coverPhoto
+            }
+          } else {
+            throw new Error('Wrong Credentials!')
+          }
+        } else {
+          throw new Error('User not found!')
         }
       }
     })
   ],
+  debug: process.env.NODE_ENV === 'development',
   session: {
     strategy: 'jwt'
   },
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token._id = (user as UserDocument)._id
-        token.firstName = (user as UserDocument).firstName
-        token.lastName = (user as UserDocument).lastName
-        token.email = user.email as string
-        token.dob = (user as UserDocument).dob
-        token.username = (user as UserDocument).username
-        token.gender = (user as UserDocument).gender
-        token.bio = (user as UserDocument).bio
-        token.pronoun = (user as UserDocument).pronoun
-        token.profilePicture = (user as UserDocument).profilePicture?.url ?? ''
-        token.coverPhoto = (user as UserDocument).coverPhoto?.url ?? ''
-      }
-      return token
-    },
-    async session({ session, token }) {
-      if (session.user) {
-        session.user._id = token._id
-        session.user.firstName = token.firstName
-        session.user.lastName = token.lastName
-        session.user.email = token.email
-        session.user.dob = token.dob
-        session.user.username = token.username
-        session.user.gender = token.gender
-        session.user.bio = token.bio
-        session.user.pronoun = token.pronoun
-        session.user.profilePicture = token.profilePicture
-        session.user.coverPhoto = token.coverPhoto
-      }
-      return session
-    }
-  },
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: '/auth/signin'
+    error: '/'
   }
 }
