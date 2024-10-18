@@ -5,8 +5,8 @@ import { signIn, useSession } from 'next-auth/react'
 import { Quicksand } from 'next/font/google'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 import { HiOutlineChatBubbleLeftRight, HiOutlineUsers } from 'react-icons/hi2'
-import { toast } from 'sonner'
 
 import Footer from '@/components/Footer'
 import Modal from '@/components/Modal'
@@ -62,11 +62,11 @@ export default function Page() {
     })
       .then((callback) => {
         if (callback?.error) {
-          toast('Invalid credentials')
+          toast.error('Invalid credentials')
         }
 
         if (callback?.ok && !callback?.error) {
-          toast('Logged in!')
+          toast.success('Logged in!')
           push('/feed')
         }
       })
