@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
+import AuthContext from '@/context/AuthContext'
 
 import '@/app/globals.css'
 
 import Providers from '@/providers'
-import { Toaster } from '@/components/ui/sonner'
+
+export const dynamic = 'force-dynamic'
 
 const geistSans = localFont({
   src: './../fonts/GeistVF.woff',
@@ -49,16 +51,15 @@ export const metadata: Metadata = {
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Providers>
-      <html suppressHydrationWarning lang="en" className="scroll-smooth">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          {children}
-          <Toaster />
-        </body>
-      </html>
-    </Providers>
+    <html suppressHydrationWarning lang="en" className="scroll-smooth">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <AuthContext>
+          <Providers>{children}</Providers>
+        </AuthContext>
+      </body>
+    </html>
   )
 }
 
