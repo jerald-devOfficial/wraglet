@@ -20,20 +20,16 @@ const quicksand = Quicksand({
 })
 
 const Header = ({ currentUser }: { currentUser: UserDocument }) => {
-  const {
-    justLoggedIn,
-    userSliceInitialized,
-    setJustLoggedIn,
-    setUserSliceInitialized
-  } = useGlobalStore()
+  const { justLoggedIn, userInitialized, setJustLoggedIn, setUserInitialized } =
+    useGlobalStore()
   const { setUser } = useUserStore()
 
   useEffect(() => {
-    if (!justLoggedIn && !userSliceInitialized) {
+    if (!justLoggedIn && !userInitialized) {
       setJustLoggedIn(true)
     }
 
-    if (justLoggedIn && !userSliceInitialized) {
+    if (justLoggedIn && !userInitialized) {
       const transformedUser = {
         ...currentUser,
         friends: currentUser?.friends.map(
@@ -41,15 +37,15 @@ const Header = ({ currentUser }: { currentUser: UserDocument }) => {
         )
       } as UserInterface
       setUser(transformedUser)
-      setUserSliceInitialized(true)
+      setUserInitialized(true)
       setJustLoggedIn(false)
     }
   }, [
     currentUser,
     justLoggedIn,
-    userSliceInitialized,
+    userInitialized,
     setJustLoggedIn,
-    setUserSliceInitialized
+    setUserInitialized
   ])
 
   return (
