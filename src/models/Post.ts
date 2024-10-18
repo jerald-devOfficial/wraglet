@@ -1,5 +1,4 @@
-import { AuthorInterface } from '@/interfaces/AuthorInterface'
-import { PostVoteInterface } from '@/interfaces/PostVoteInterface'
+import { AuthorInterface, PostVoteInterface } from '@/interfaces'
 import mongoose, { Document, Schema } from 'mongoose'
 
 import { PostReactionDocument } from './PostReaction'

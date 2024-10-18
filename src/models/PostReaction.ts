@@ -1,4 +1,4 @@
-import { AuthorInterface } from '@/interfaces/AuthorInterface'
+import { AuthorInterface } from '@/interfaces'
 import mongoose, { Document, Schema } from 'mongoose'
 
 export interface PostReactionDocument extends Document {
