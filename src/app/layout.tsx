@@ -4,6 +4,7 @@ import AuthContext from '@/context/AuthContext'
 
 import '@/app/globals.css'
 
+import ToasterContext from '@/context/ToasterContext'
 import Providers from '@/providers'
 
 export const dynamic = 'force-dynamic'
@@ -56,7 +57,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthContext>
-          <Providers>{children}</Providers>
+          <Providers>
+            <ToasterContext />
+            {children}
+          </Providers>
         </AuthContext>
       </body>
     </html>
