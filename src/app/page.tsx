@@ -10,6 +10,7 @@ import { HiOutlineChatBubbleLeftRight, HiOutlineUsers } from 'react-icons/hi2'
 
 import Footer from '@/components/Footer'
 import Modal from '@/components/Modal'
+import SignUp from '@/components/SignUp'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
@@ -40,12 +41,6 @@ export default function Page() {
   const reducer = (state: any, action: any) => ({ ...state, ...action })
   const [{ email, password, isOpenSignUpModal, isLoading }, dispatchState] =
     useReducer(reducer, initialState)
-
-  useEffect(() => {
-    if (status === 'authenticated') {
-      push('/feed')
-    }
-  }, [push, status])
 
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -81,8 +76,7 @@ export default function Page() {
           isOpen={isOpenSignUpModal}
           title="Create an account"
         >
-          Sign up
-          {/* <SignUp /> */}
+          <SignUp />
         </Modal>
         <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden">
           <section className="hidden w-full flex-grow grid-cols-2 md:grid">
@@ -151,6 +145,7 @@ export default function Page() {
                   <p className="text-xs font-medium text-black">
                     Don&apos;t have an account?{' '}
                     <button
+                      type="button"
                       className="cursor-pointer text-[#1B87EA]"
                       onClick={() => dispatchState({ isOpenSignUpModal: true })}
                     >
@@ -186,6 +181,7 @@ export default function Page() {
                 </h1>
               </div>
               <button
+                type="button"
                 onClick={() => dispatchState({ isOpenSignUpModal: true })}
                 className="text-[10px] font-medium text-white"
               >
@@ -228,6 +224,7 @@ export default function Page() {
                 <p className="text-xs font-medium text-black">
                   Don&apos;t have an account?{' '}
                   <button
+                    type="button"
                     className="cursor-pointer text-[#1B87EA]"
                     onClick={() => dispatchState({ isOpenSignUpModal: true })}
                   >
