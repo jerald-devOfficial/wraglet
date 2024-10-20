@@ -78,6 +78,7 @@ const AvatarMenu = () => {
             <MenuItem>
               {({ active }) => (
                 <button
+                  type="button"
                   className={`${
                     active ? 'bg-[#1B87EA] text-white' : 'text-gray-900'
                   } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
@@ -96,6 +97,7 @@ const AvatarMenu = () => {
             <MenuItem>
               {({ active }) => (
                 <button
+                  type="button"
                   onClick={handleLogout}
                   className={`${
                     active ? 'bg-[#1B87EA] text-white' : 'text-gray-900'

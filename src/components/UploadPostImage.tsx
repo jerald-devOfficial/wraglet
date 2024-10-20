@@ -201,6 +201,7 @@ const UploadPostImage: FC<Props> = ({
           <DialogPanel className="fixed inset-0 z-10 flex items-center justify-center">
             <div className="relative grid w-[530px] gap-5 rounded-2xl bg-white p-10">
               <button
+                type="button"
                 onClick={handleClose}
                 className="absolute right-6 top-6 rounded-md p-1 hover:bg-slate-100"
               >
@@ -251,6 +252,7 @@ const UploadPostImage: FC<Props> = ({
 
               {!isCropping ? (
                 <button
+                  type="button"
                   onClick={() => setIsCropping(true)}
                   className="text-primary flex items-center gap-x-2 hover:text-gray-500"
                 >
@@ -260,6 +262,7 @@ const UploadPostImage: FC<Props> = ({
                 </button>
               ) : (
                 <button
+                  type="button"
                   onClick={() => setIsCropping(false)}
                   className="flex items-center gap-x-2"
                 >

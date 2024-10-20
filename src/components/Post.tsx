@@ -292,7 +292,7 @@ const Post = ({ post }: Props) => {
             </div>
           </div>
         </div>
-        <Button className="flex items-center gap-0.5">
+        <Button type="button" className="flex items-center gap-0.5">
           {arrGenerator(3).map((i: number) => (
             <span className="h-0.5 w-0.5 rounded-full bg-gray-700" key={i} />
           ))}
