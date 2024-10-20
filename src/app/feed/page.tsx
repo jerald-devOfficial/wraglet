@@ -39,7 +39,7 @@ const Page = async () => {
       <div className="flex flex-grow items-start gap-x-5 sm:mx-10 tablet:ml-10 xl:mx-auto xl:ml-20 2xl:ml-auto">
         <FeedParent initialPosts={initialPosts} />
 
-        {/* <RightNav otherUsers={otherUsers!} /> */}
+        <RightNav otherUsers={otherUsers!} />
       </div>
     </main>
   )

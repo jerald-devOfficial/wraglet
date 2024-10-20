@@ -2,23 +2,14 @@
 
 import { useEffect, useState } from 'react'
 import getOtherUsers from '@/actions/getOtherUsers'
+import { UserInterface } from '@/interfaces'
 import { useQuery } from '@tanstack/react-query'
 import { IoPersonAddSharp } from 'react-icons/io5'
 
 import Avatar from '@/components/Avatar'
 
-const RigthNav = () => {
+const RigthNav = ({ otherUsers }: { otherUsers: UserInterface[] }) => {
   const [hydrated, setHydrated] = useState(false)
-
-  // Use useQuery to fetch other users
-  const {
-    data: otherUsers = [],
-    isLoading,
-    isError
-  } = useQuery({
-    queryKey: ['otherUsers'],
-    queryFn: () => getOtherUsers()
-  })
 
   useEffect(() => {
     // This forces a rerender, so the date is rendered
@@ -29,14 +20,6 @@ const RigthNav = () => {
   if (!hydrated) {
     // Returns null on first render, so the client and server match
     return null
-  }
-
-  if (isLoading) {
-    return <div>Loading...</div> // Optional loading state
-  }
-
-  if (isError) {
-    return <div>Error loading users</div> // Optional error state
   }
 
   return (
