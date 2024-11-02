@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
 import getCurrentUser from '@/actions/getCurrentUser'
-import dbConnect from '@/lib/dbConnect'
 import Post from '@/models/Post'
 import PostReaction from '@/models/PostReaction'
+import mongoose from 'mongoose'
 
 export const PATCH = async (
   request: Request,
@@ -13,7 +13,7 @@ export const PATCH = async (
   }
 ) => {
   try {
-    await dbConnect()
+    await mongoose.connect(process.env.MONGODB_URI!)
 
     const currentUser = await getCurrentUser()
     const body = await request.json()

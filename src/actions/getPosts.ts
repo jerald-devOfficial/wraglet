@@ -1,12 +1,12 @@
-import dbConnect from '@/lib/dbConnect'
 import Post, { PostDocument } from '@/models/Post'
+import mongoose from 'mongoose'
 
 // Import PostDocument for type safety
 
 const getPosts = async (): Promise<PostDocument[]> => {
   try {
     // Connect to the database
-    await dbConnect()
+    await mongoose.connect(process.env.MONGODB_URI!)
 
     // Fetch posts with audience 'public', sorted by creation date
     const posts = await Post.find({ audience: 'public' })

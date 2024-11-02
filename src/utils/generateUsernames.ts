@@ -1,10 +1,9 @@
-import dbConnect from '@/lib/dbConnect'
 import User from '@/models/User'
 import mongoose from 'mongoose'
 
 const generateUsernames = async () => {
   try {
-    await dbConnect()
+    await mongoose.connect(process.env.MONGODB_URI!)
 
     const users = await User.find()
 

@@ -1,49 +1,50 @@
-import mongoose, { Document, Schema } from 'mongoose';
+'use server'
+
+import mongoose, { Document, Schema } from 'mongoose'
+
+mongoose.connect(process.env.MONGODB_URI!)
 
 export interface UserDocument extends Document {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  suffix?: string;
-  email: string;
-  hashedPassword: string;
-  username: string;
-  dob: Date;
-  gender: string;
-  bio?: string;
-  pronoun: string;
+  firstName: string
+  lastName: string
+  suffix?: string
+  email: string
+  hashedPassword: string
+  username: string
+  dob: Date
+  gender: string
+  bio?: string
+  pronoun: string
   profilePicture?: {
-    url: string;
-    key: string;
-  };
+    url: string
+    key: string
+  }
   coverPhoto?: {
-    url: string;
-    key: string;
-  };
-  publicProfileVisible: boolean;
-  friendRequests: string;
+    url: string
+    key: string
+  }
+  publicProfileVisible: boolean
+  friendRequests: string
   followers: [
     {
-      userId: string;
-      createdAt: Date;
+      userId: string
+      createdAt: Date
     }
-  ];
+  ]
   following: [
     {
-      userId: string;
+      userId: string
 
-      createdAt: Date;
+      createdAt: Date
     }
-  ];
+  ]
   friends: [
     {
-      userId: string;
-      relationship: string;
-      createdAt: Date;
+      userId: string
+      relationship: string
+      createdAt: Date
     }
-  ];
-  createdAt: Date;
-  updatedAt?: Date;
+  ]
 }
 
 const UserSchema = new Schema<UserDocument>(
@@ -80,7 +81,8 @@ const UserSchema = new Schema<UserDocument>(
     ]
   },
   { timestamps: true }
-);
+)
 
-export default mongoose.models.User ||
-  mongoose.model<UserDocument>('User', UserSchema);
+const User =
+  mongoose.models.User || mongoose.model<UserDocument>('User', UserSchema)
+export default User

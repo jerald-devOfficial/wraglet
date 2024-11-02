@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
 import getCurrentUser from '@/actions/getCurrentUser'
-import dbConnect from '@/lib/dbConnect'
 import Post from '@/models/Post'
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
+import mongoose from 'mongoose'
 import { v4 as uuidv4 } from 'uuid'
 
 export const POST = async (request: Request) => {
@@ -16,7 +16,7 @@ export const POST = async (request: Request) => {
   })
 
   try {
-    await dbConnect()
+    await mongoose.connect(process.env.MONGODB_URI!)
 
     const currentUser = await getCurrentUser()
     const body = await request.json()

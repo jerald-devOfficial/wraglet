@@ -1,6 +1,6 @@
 import getSession from '@/actions/getSession'
-import dbConnect from '@/lib/dbConnect'
 import User from '@/models/User'
+import mongoose from 'mongoose'
 
 const getCurrentUser = async () => {
   try {
@@ -13,7 +13,7 @@ const getCurrentUser = async () => {
     }
 
     // Connect to the database
-    await dbConnect()
+    await mongoose.connect(process.env.MONGODB_URI!)
 
     // Find the user by email, excluding the hashed password
     const currentUser = await User.findOne({

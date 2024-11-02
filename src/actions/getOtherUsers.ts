@@ -1,6 +1,6 @@
 import getSession from '@/actions/getSession'
-import dbConnect from '@/lib/dbConnect'
 import User from '@/models/User'
+import mongoose from 'mongoose'
 
 const getOtherUsers = async () => {
   const session = await getSession().catch((err) => {
@@ -15,7 +15,7 @@ const getOtherUsers = async () => {
   }
 
   try {
-    await dbConnect()
+    await mongoose.connect(process.env.MONGODB_URI!)
 
     const users = await User.find({
       email: { $ne: session.user.email }

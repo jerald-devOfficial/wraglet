@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/utils/authOptions' // Adjust the import path as necessary
+import { authOptions } from '@/utils/authOptions'
 
 export default async function GetSession() {
   try {

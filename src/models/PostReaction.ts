@@ -1,13 +1,14 @@
+'use server'
+
 import { AuthorInterface } from '@/interfaces'
 import mongoose, { Document, Schema } from 'mongoose'
 
+mongoose.connect(process.env.MONGODB_URI!)
+
 export interface PostReactionDocument extends Document {
-  _id: string
   type: string
   postId: mongoose.Types.ObjectId
   userId: AuthorInterface
-  createdAt: Date
-  updatedAt: Date
 }
 
 const PostReactionSchema = new Schema<PostReactionDocument>(
@@ -19,6 +20,8 @@ const PostReactionSchema = new Schema<PostReactionDocument>(
   { timestamps: true }
 )
 
-export default (mongoose.models
-  .PostReaction as mongoose.Model<PostReactionDocument>) ||
+const PostReaction =
+  mongoose.models.PostReaction ||
   mongoose.model<PostReactionDocument>('PostReaction', PostReactionSchema)
+
+export default PostReaction

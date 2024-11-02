@@ -1,8 +1,8 @@
 import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import dbConnect from '@/lib/dbConnect'
 import User, { UserDocument } from '@/models/User'
 import bcrypt from 'bcryptjs'
+import mongoose, { Types } from 'mongoose'
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         // Check if the user exists.
-        await dbConnect()
+        await mongoose.connect(process.env.MONGODB_URI!);
 
         const user = (await User.findOne({
           email: credentials?.email?.toLowerCase()
@@ -28,21 +28,13 @@ export const authOptions: NextAuthOptions = {
           )
 
           if (isPasswordCorrect) {
-            // Cast user to UserDocument to access properties
-            const typedUser = user
-
+            // Return only the necessary fields for the User type
             return {
-              id: typedUser._id.toString(), // convert ObjectId to string
-              firstName: typedUser.firstName,
-              lastName: typedUser.lastName,
-              email: typedUser.email,
-              dob: typedUser.dob,
-              username: typedUser.username,
-              gender: typedUser.gender,
-              bio: typedUser.bio,
-              pronoun: typedUser.pronoun,
-              profilePicture: typedUser.profilePicture,
-              coverPhoto: typedUser.coverPhoto
+              id: (user._id as Types.ObjectId).toString(),
+              email: user.email,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              username: user.username
             }
           } else {
             throw new Error('Wrong Credentials!')

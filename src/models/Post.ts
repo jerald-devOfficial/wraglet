@@ -1,9 +1,12 @@
+'use server'
+
 import { AuthorInterface, PostVoteInterface } from '@/interfaces'
 import { PostReactionDocument } from '@/models/PostReaction'
 import mongoose, { Document, Schema } from 'mongoose'
 
+mongoose.connect(process.env.MONGODB_URI!)
+
 export interface PostDocument extends Document {
-  _id: string
   content: {
     text?: string
     images?: {
@@ -15,8 +18,6 @@ export interface PostDocument extends Document {
   author: AuthorInterface
   reactions: PostReactionDocument[]
   votes: PostVoteInterface[]
-  createdAt: Date
-  updatedAt?: Date
 }
 
 const PostSchema = new Schema<PostDocument>(
@@ -40,5 +41,8 @@ const PostSchema = new Schema<PostDocument>(
   { timestamps: true }
 )
 
-export default (mongoose.models.Post as mongoose.Model<PostDocument>) ||
+const Post =
+  (mongoose.models.Post as mongoose.Model<PostDocument>) ||
   mongoose.model<PostDocument>('Post', PostSchema)
+
+export default Post
