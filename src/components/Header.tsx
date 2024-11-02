@@ -35,7 +35,7 @@ const Header = ({ currentUser }: { currentUser: UserDocument }) => {
         friends: currentUser?.friends.map(
           (friend: { userId: string }) => friend.userId
         )
-      } as UserInterface
+      } as unknown as UserInterface
       setUser(transformedUser)
       setUserInitialized(true)
       setJustLoggedIn(false)

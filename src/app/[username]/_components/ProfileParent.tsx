@@ -6,11 +6,7 @@ import { AblyProvider, ChannelProvider } from 'ably/react'
 
 import Body from '@/app/[username]/_components/Body'
 
-type Props = {
-  initialPosts: PostDocument[]
-}
-
-const ProfileParent = ({ initialPosts }: Props) => {
+const ProfileParent = ({ initialPosts }: { initialPosts: PostDocument[] }) => {
   const client = new Ably.Realtime({ authUrl: '/api/token' })
   return (
     <AblyProvider client={client}>

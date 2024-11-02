@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { UserInterface } from '@/interfaces'
 import { IoPersonAddSharp } from 'react-icons/io5'
 
@@ -37,12 +38,14 @@ const RigthNav = ({ otherUsers }: { otherUsers: UserInterface[] }) => {
                 className="hover:ring-solid group flex h-[50px] cursor-pointer items-center rounded-lg px-3 hover:bg-white hover:ring-1 hover:ring-neutral-200"
               >
                 <div className="flex flex-1 items-center space-x-2">
-                  <Avatar
-                    gender={user.gender}
-                    className="group-hover:border-white"
-                    alt={`${user.firstName}'s Profile`}
-                    src={user.profilePicture?.url}
-                  />
+                  <Link href={`/${user.username}`}>
+                    <Avatar
+                      gender={user.gender}
+                      className="group-hover:border-white"
+                      alt={`${user.firstName}'s Profile`}
+                      src={user.profilePicture?.url!}
+                    />
+                  </Link>
                   <div className="flex flex-col gap-y-0.5">
                     <div className="flex items-center gap-4">
                       <h3 className="text-sm font-semibold text-[#333333] group-hover:text-gray-700">
