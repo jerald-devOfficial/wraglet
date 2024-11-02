@@ -31,7 +31,7 @@ const LeftSideNav = () => {
       >
         <div className="mt-4 flex flex-1 flex-col gap-y-6">
           <Link
-            href={`/profile/${user?.username}`}
+            href={`/${user?.username}`}
             className="group flex h-[50px] w-full cursor-pointer items-center rounded-lg border border-solid border-neutral-200 bg-white px-3 drop-shadow-md hover:bg-gray-400"
           >
             <div className="flex items-center space-x-2">
