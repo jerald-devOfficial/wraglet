@@ -3,9 +3,9 @@ import getOtherUsers from '@/actions/getOtherUsers'
 import getPosts from '@/actions/getPosts'
 import deJSONify from '@/utils/deJSONify'
 
-import FeedClientWrapper from '@/app/feed/_components/Feed/FeedClientWrapper'
-import LeftNav from '@/app/feed/_components/LeftNav'
-import RightNav from '@/app/feed/_components/RightNav'
+import FeedClientWrapper from '@/app/(authenticated)/feed/_components/Feed/FeedClientWrapper'
+import LeftNav from '@/app/(authenticated)/feed/_components/LeftNav'
+import RightNav from '@/app/(authenticated)/feed/_components/RightNav'
 import Loading from '@/app/loading'
 
 const Page = async () => {

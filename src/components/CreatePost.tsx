@@ -52,7 +52,7 @@ const CreatePost = ({
             <Avatar
               gender={user?.gender}
               alt={`${user?.firstName}'s photo`}
-              src={user?.profilePicture?.url}
+              src={user?.profilePicture?.url!}
             />
           </div>
           <form

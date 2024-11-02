@@ -145,7 +145,7 @@ const Post = ({ post }: Props) => {
         <div className="relative block">
           <Avatar
             gender={post.author?.gender}
-            src={post.author.profilePicture?.url}
+            src={post.author.profilePicture?.url!}
           />
         </div>
         <div className="flex flex-grow flex-col justify-start gap-y-5">
@@ -279,7 +279,7 @@ const Post = ({ post }: Props) => {
               <Avatar
                 gender={user?.gender}
                 size="h-6 w-6"
-                src={user?.profilePicture?.url}
+                src={user?.profilePicture?.url!}
               />
               <div className="flex-1">
                 <input

@@ -39,7 +39,7 @@ const AvatarMenu = () => {
         <Avatar
           gender={user?.gender}
           size="h-8 w-8"
-          src={user?.profilePicture?.url}
+          src={user?.profilePicture?.url!}
           alt={'Avatar'}
         />
       </MenuButton>

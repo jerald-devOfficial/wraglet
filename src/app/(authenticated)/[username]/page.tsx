@@ -2,8 +2,8 @@ import React from 'react'
 import getPostsByUsername from '@/actions/getPostsByUsername'
 import deJSONify from '@/utils/deJSONify'
 
-import Header from '@/app/[username]/_components/Header'
-import ProfileParent from '@/app/[username]/_components/ProfileParent'
+import Header from '@/app/(authenticated)/[username]/_components/Header'
+import ProfileParent from '@/app/(authenticated)/[username]/_components/ProfileParent'
 
 const ProfilePage = async ({
   params

@@ -5,7 +5,7 @@ import { FaCamera, FaPencil, FaUserPen } from 'react-icons/fa6'
 
 import Avatar from '@/components/Avatar'
 
-import UploadProfilePicture from '@/app/[username]/_components/UploadProfilePicture'
+import UploadProfilePicture from '@/app/(authenticated)/[username]/_components/UploadProfilePicture'
 
 const ProfileHeader = async ({ username }: { username: string }) => {
   const user = await getUserByUsername(username)

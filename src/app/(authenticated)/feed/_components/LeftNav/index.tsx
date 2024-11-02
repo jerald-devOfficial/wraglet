@@ -39,7 +39,7 @@ const LeftSideNav = () => {
                 gender={user?.gender}
                 className="group-hover:border-white"
                 alt={`${user?.firstName}'s Profile`}
-                src={user?.profilePicture?.url}
+                src={user?.profilePicture?.url!}
               />
               <h2 className="text-xs font-semibold text-[#333333] group-hover:text-white">
                 {user?.firstName}
