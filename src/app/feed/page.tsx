@@ -1,19 +1,10 @@
-import dynamic from 'next/dynamic'
 import getOtherUsers from '@/actions/getOtherUsers'
 import getPosts from '@/actions/getPosts'
 import deJSONify from '@/utils/deJSONify'
 
-const FeedParent = dynamic(() => import('./_components/Feed/FeedParent'), {
-  ssr: false
-})
-
-const LeftNav = dynamic(() => import('./_components/LeftNav'), {
-  ssr: false
-})
-
-const RightNav = dynamic(() => import('./_components/RightNav'), {
-  ssr: false
-})
+import FeedParent from '@/app/feed/_components/Feed/FeedParent'
+import LeftNav from '@/app/feed/_components/LeftNav'
+import RightNav from '@/app/feed/_components/RightNav'
 
 const Page = async () => {
   const jsonOtherUsers = await getOtherUsers().catch((err: any) => {
@@ -39,7 +30,7 @@ const Page = async () => {
       <div className="flex flex-grow items-start gap-x-5 sm:mx-10 tablet:ml-10 xl:mx-auto xl:ml-20 2xl:ml-auto">
         <FeedParent initialPosts={initialPosts} />
 
-        <RightNav otherUsers={otherUsers!} />
+        <RightNav otherUsers={otherUsers} />
       </div>
     </main>
   )
