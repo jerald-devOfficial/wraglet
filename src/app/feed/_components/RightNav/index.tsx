@@ -1,9 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import getOtherUsers from '@/actions/getOtherUsers'
 import { UserInterface } from '@/interfaces'
-import { useQuery } from '@tanstack/react-query'
 import { IoPersonAddSharp } from 'react-icons/io5'
 
 import Avatar from '@/components/Avatar'

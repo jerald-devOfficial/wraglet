@@ -1,7 +1,6 @@
 import { AuthorInterface, PostVoteInterface } from '@/interfaces'
+import { PostReactionDocument } from '@/models/PostReaction'
 import mongoose, { Document, Schema } from 'mongoose'
-
-import { PostReactionDocument } from './PostReaction'
 
 export interface PostDocument extends Document {
   _id: string

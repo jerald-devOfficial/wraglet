@@ -23,11 +23,10 @@ import Cropper from 'react-easy-crop'
 import { FaCrop } from 'react-icons/fa6'
 
 import { MAX_FILE_SIZE } from '@/data/constants'
-
-import CrossWhite from './CrossWhite'
-import ThreeCardsImage from './ThreeCardsImage'
-import { Skeleton } from './ui/skeleton'
-import { Slider } from './ui/slider'
+import CrossWhite from '@/components/CrossWhite'
+import ThreeCardsImage from '@/components/ThreeCardsImage'
+import { Skeleton } from '@/components/ui/skeleton'
+import { Slider } from '@/components/ui/slider'
 
 type Props = {
   postImage: string
@@ -45,10 +44,10 @@ const baseStyle: CSSProperties = {
   padding: '20px',
   height: '200px',
   borderWidth: 2,
-  borderRadius: 2,
-  borderColor: '#eeeeee',
+  borderRadius: 8,
+  borderColor: '#0ea5e9',
   borderStyle: 'dashed',
-  backgroundColor: 'rgba(0, 0, 0, 0.9)',
+  backgroundColor: 'white',
   color: '#bdbdbd',
   outline: 'none',
   transition: 'border .24s ease-in-out'
@@ -115,17 +114,20 @@ const UploadPostImage: FC<Props> = ({
     })
   }
 
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    if (acceptedFiles && acceptedFiles.length > 0) {
-      const file = acceptedFiles[0]
-      if (MAX_FILE_SIZE < file.size) {
-        setLimitErr('File size exceeds the 4MB limit.')
-        return
+  const onDrop = useCallback((acceptedFiles: File[]) => {
+    const processFiles = async () => {
+      if (acceptedFiles && acceptedFiles.length > 0) {
+        const file = acceptedFiles[0]
+        if (MAX_FILE_SIZE < file.size) {
+          setLimitErr('File size exceeds the 4MB limit.')
+          return
+        }
+        const imageDataUrl = await readFile(file)
+        setImage(imageDataUrl)
+        setLimitErr(null)
       }
-      const imageDataUrl = await readFile(file)
-      setImage(imageDataUrl)
-      setLimitErr(null)
     }
+    processFiles()
   }, [])
 
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
@@ -334,7 +336,7 @@ const UploadPostImage: FC<Props> = ({
                           id="file"
                           className="hidden"
                         />
-                        browse
+                        <span>browse</span>
                       </label>
                     </div>
                     <span className="text-sm font-medium text-slate-400">

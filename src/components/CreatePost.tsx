@@ -8,9 +8,8 @@ import { HiOutlinePlayCircle } from 'react-icons/hi2'
 
 import Avatar from '@/components/Avatar'
 import { GalleryIcon, TerminalIcon } from '@/components/Icons'
-
-import { Button } from './ui/button'
-import UploadPostImage from './UploadPostImage'
+import { Button } from '@/components/ui/button'
+import UploadPostImage from '@/components/UploadPostImage'
 
 type Props = {
   submitPost: (e: FormEvent) => Promise<void>

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 
-import ListBox, { ListProps } from './ListBox'
+import ListBox, { ListProps } from '@/components/ListBox'
 
 interface BirthdayPickerProps {
   dateSetter: (val: Date) => void

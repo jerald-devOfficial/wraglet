@@ -11,9 +11,8 @@ import { LuArrowBigDown, LuArrowBigUp } from 'react-icons/lu'
 
 import Avatar from '@/components/Avatar'
 import { ShareIcon } from '@/components/Icons'
-
-import ReactionIcon from './ReactionIcon'
-import { Button } from './ui/button'
+import ReactionIcon from '@/components/ReactionIcon'
+import { Button } from '@/components/ui/button'
 
 type Props = {
   post: PostInterface

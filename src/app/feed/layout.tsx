@@ -5,7 +5,7 @@ import deJSONify from '@/utils/deJSONify'
 
 import Header from '@/components/Header'
 
-import Loading from '../loading'
+import Loading from '@/app/loading'
 
 export const dynamic = 'force-dynamic'
 

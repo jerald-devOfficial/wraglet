@@ -1,7 +1,6 @@
+import getSession from '@/actions/getSession'
 import dbConnect from '@/lib/dbConnect'
 import User from '@/models/User'
-
-import getSession from './getSession'
 
 const getCurrentUser = async () => {
   try {

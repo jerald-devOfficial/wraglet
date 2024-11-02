@@ -9,8 +9,8 @@ import { UserDocument } from '@/models/User'
 import useGlobalStore from '@/store/global'
 import useUserStore from '@/store/user'
 
-import AvatarMenu from './AvatarMenu'
-import { BellIcon, ChatIcon, HomeIcon, PeopleIcon } from './NavIcons'
+import AvatarMenu from '@/components/AvatarMenu'
+import { BellIcon, ChatIcon, HomeIcon, PeopleIcon } from '@/components/NavIcons'
 
 const quicksand = Quicksand({
   subsets: ['latin'],
@@ -41,6 +41,7 @@ const Header = ({ currentUser }: { currentUser: UserDocument }) => {
       setJustLoggedIn(false)
     }
   }, [
+    setUser,
     currentUser,
     justLoggedIn,
     userInitialized,

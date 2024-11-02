@@ -8,13 +8,18 @@ import { FormProvider, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
 
-import { getValidationMessages } from './auth/password-validations'
-import BirthdayPicker from './BirthdayPicker'
-import Checkbox from './Checkbox'
-import ListBox, { ListProps } from './ListBox'
-import { Button } from './ui/button'
-import { FormControl, FormField, FormItem, FormMessage } from './ui/form' // Assuming these components exist
-import { Input } from './ui/input'
+import { getValidationMessages } from '@/components/auth/password-validations'
+import BirthdayPicker from '@/components/BirthdayPicker'
+import Checkbox from '@/components/Checkbox'
+import ListBox, { ListProps } from '@/components/ListBox'
+import { Button } from '@/components/ui/button'
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 
 const friendRequestsOptions: ListProps[] = [
   { val: 'everyone', name: 'Everyone' },
@@ -34,7 +39,7 @@ const signUpSchema = z.object({
     .min(8, 'Password must be at least 8 characters')
     .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
     .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
-    .regex(/[0-9]/, 'Password must contain at least one number')
+    .regex(/\d/, 'Password must contain at least one number')
     .regex(
       /[@$!%*?&#]/,
       'Password must contain at least one special character'
