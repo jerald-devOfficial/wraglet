@@ -6,7 +6,7 @@ import { AblyProvider, ChannelProvider } from 'ably/react'
 
 import FeedBody from '@/app/feed/_components/Feed'
 
-const FeedParent = ({ initialPosts }: { initialPosts: PostInterface[] }) => {
+const FeedAbly = ({ initialPosts }: { initialPosts: PostInterface[] }) => {
   const client = new Ably.Realtime({ authUrl: '/api/token' })
 
   return (
@@ -18,4 +18,4 @@ const FeedParent = ({ initialPosts }: { initialPosts: PostInterface[] }) => {
   )
 }
 
-export default FeedParent
+export default FeedAbly

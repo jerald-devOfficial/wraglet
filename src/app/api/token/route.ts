@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server'
-// import getCurrentUser from '@/actions/getCurrentUser'
+import getCurrentUser from '@/actions/getCurrentUser'
 import Ably from 'ably'
 
 export const GET = async () => {
   try {
-    // const currentUser = await getCurrentUser()
+    const currentUser = await getCurrentUser()
     if (!process.env.ABLY_API_KEY) {
       return NextResponse.json(
         {
@@ -25,8 +25,8 @@ export const GET = async () => {
     const client = new Ably.Rest(process.env.ABLY_API_KEY)
     // Removed 'await' as createTokenRequest is not a promise
     const tokenRequestData = await client.auth.createTokenRequest({
-      clientId: 'wraglet-ably'
-      // clientId: currentUser?._id
+      // clientId: 'wraglet-ably'
+      clientId: currentUser?._id
     })
     return NextResponse.json(tokenRequestData)
   } catch (error: any) {
