@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
-import AuthContext from '@/context/AuthContext'
 
 import '@/app/globals.css'
 
@@ -56,12 +55,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthContext>
-          <Providers>
-            <ToasterContext />
-            {children}
-          </Providers>
-        </AuthContext>
+        <Providers>
+          <ToasterContext />
+          {children}
+        </Providers>
       </body>
     </html>
   )
