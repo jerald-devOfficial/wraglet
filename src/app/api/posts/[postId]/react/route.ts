@@ -4,13 +4,13 @@ import dbConnect from '@/lib/dbConnect'
 import Post from '@/models/Post'
 import PostReaction from '@/models/PostReaction'
 
-interface IParams {
-  postId: string
-}
-
 export const PATCH = async (
   request: Request,
-  { params }: { params: IParams }
+  {
+    params
+  }: {
+    params: Promise<{ postId: string }>
+  }
 ) => {
   try {
     await dbConnect()
@@ -18,7 +18,7 @@ export const PATCH = async (
     const currentUser = await getCurrentUser()
     const body = await request.json()
     const { type } = body
-    const { postId } = params
+    const postId = (await params).postId
 
     if (!currentUser?._id || !currentUser?.email) {
       return new NextResponse('Unauthorized', { status: 401 })
