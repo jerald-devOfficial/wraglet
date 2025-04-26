@@ -1,33 +1,44 @@
-import mongoose, { Document, Schema } from 'mongoose';
+'use server'
 
-export interface UserDocument extends Document {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  suffix?: string;
-  email: string;
-  hashedPassword: string;
-  username: string;
-  dob: Date;
-  gender: string;
-  bio?: string;
-  pronoun: string;
+import { Document, model, models, Schema } from 'mongoose'
+
+// Base User interface without MongoDB document properties
+export interface IUser {
+  firstName: string
+  lastName: string
+  suffix?: string
+  email: string
+  username: string
+  dob: Date
+  gender: string
+  bio?: string
+  pronoun: string
   profilePicture?: {
-    url: string;
-    key: string;
-  };
+    url: string
+    key: string
+  }
   coverPhoto?: {
-    url: string;
-    key: string;
-  };
-  publicProfileVisible: boolean;
-  friendRequests: string;
-  friends: string[];
-  createdAt: Date;
-  updatedAt?: Date;
+    url: string
+    key: string
+  }
+  publicProfileVisible: boolean
+  photoCollection: Array<{
+    url: string
+    key: string
+    type: 'post' | 'avatar'
+    createdAt: Date
+  }>
+  createdAt?: Date
+  updatedAt?: Date
 }
 
-const UserSchema = new Schema<UserDocument>(
+// Interface for User document with authentication needs
+export interface IUserDocument extends IUser, Document {
+  hashedPassword: string
+}
+
+// Schema includes all fields including hashedPassword
+const UserSchema = new Schema<IUserDocument>(
   {
     firstName: String,
     lastName: String,
@@ -42,11 +53,22 @@ const UserSchema = new Schema<UserDocument>(
     profilePicture: { type: Object, url: String, key: String },
     coverPhoto: { type: Object, url: String, key: String },
     publicProfileVisible: { type: Boolean, default: true },
-    friendRequests: String,
-    friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Friendship' }]
+    photoCollection: [
+      {
+        url: String,
+        key: String,
+        type: {
+          type: String,
+          enum: ['post', 'avatar'],
+          required: true
+        },
+        createdAt: { type: Date, default: Date.now }
+      }
+    ]
   },
   { timestamps: true }
-);
+)
 
-export default mongoose.models.User ||
-  mongoose.model<UserDocument>('User', UserSchema);
+const User = models?.User || model<IUserDocument>('User', UserSchema)
+
+export default User

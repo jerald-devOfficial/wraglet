@@ -1,15 +1,25 @@
-export const dynamic = 'force-dynamic';
+import type { Metadata } from 'next'
+import localFont from 'next/font/local'
 
-import type { Metadata } from 'next';
-import './globals.css';
-import AuthContext from '@/context/AuthContext';
-import ToasterContext from '@/context/ToasterContext';
-import { Inter } from 'next/font/google';
-import ReduxProvider from '@/providers/ReduxProvider';
+import '@/app/globals.css'
 
-const inter = Inter({ subsets: ['latin'], preload: true });
+import ToasterContext from '@/context/ToasterContext'
+import Providers from '@/providers'
 
-const title = 'Wraglet';
+export const dynamic = 'force-dynamic'
+
+const geistSans = localFont({
+  src: './../fonts/GeistVF.woff',
+  variable: '--font-geist-sans',
+  weight: '100 900'
+})
+const geistMono = localFont({
+  src: './../fonts/GeistMonoVF.woff',
+  variable: '--font-geist-mono',
+  weight: '100 900'
+})
+
+const title = 'Wraglet'
 
 export const metadata: Metadata = {
   title: title,
@@ -17,7 +27,7 @@ export const metadata: Metadata = {
     "Wraglet is more than a social platform; it's a movement towards profound connections. Embrace a future where impactful brevity takes center stage, and every voice resonates. Join Wraglet today and be part of the evolution of meaningful online interaction.",
   twitter: {
     images: {
-      url: 'https://wraglet.com/images/logo/logo.png',
+      url: 'https://pub-c5365d46e2924ca2be4f4198d5b3d377.r2.dev/images/logo/logo.png',
       alt: 'Wraglet - Redefining Social Connection',
       type: 'image/png',
       width: 300,
@@ -27,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: title,
     images: {
-      url: 'https://wraglet.com/images/logo/logo.png',
+      url: 'https://pub-c5365d46e2924ca2be4f4198d5b3d377.r2.dev/images/logo/logo.png',
       alt: 'Wraglet - Redefining Social Connection',
       type: 'image/png',
       width: 300,
@@ -37,23 +47,21 @@ export const metadata: Metadata = {
     description:
       'Discover Wraglet, where concise expression meets impactful connection. Redefining social media, Wraglet fosters meaningful interactions with a focus on brevity and resonance. Join us for a future where every voice matters.'
   }
-};
+}
 
-export default function RootLayout({
-  children
-}: {
-  children: React.ReactNode;
-}) {
+const Layout = async ({ children }: { children: React.ReactNode }) => {
   return (
-    <html lang='en'>
-      <body className={inter.className}>
-        <AuthContext>
-          <ReduxProvider>
-            <ToasterContext />
-            {children}
-          </ReduxProvider>
-        </AuthContext>
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
+      >
+        <Providers>
+          <ToasterContext />
+          {children}
+        </Providers>
       </body>
     </html>
-  );
+  )
 }
+
+export default Layout
