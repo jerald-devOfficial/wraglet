@@ -9,7 +9,7 @@ import Header from '@/components/layout/Header'
 import MobileBottomNav from '@/components/layout/MobileBottomNav'
 
 interface Props {
-  currentUser: IUser
+  currentUser: IUser & { _id: string }
   children: React.ReactNode
 }
 
@@ -20,9 +20,11 @@ const AuthenticatedLayoutClientWrapper = ({ currentUser, children }: Props) => {
   return (
     <AblyProvider>
       <div className="relative flex min-h-screen flex-col items-center overflow-hidden bg-[rgba(110,201,247,0.15)]">
-        <Header currentUser={currentUser} />
+        <Header currentUser={currentUser || null} />
         {children}
-        {!isMessagesRoute && <ChatFloaterServer currentUser={currentUser} />}
+        {!isMessagesRoute && (
+          <ChatFloaterServer currentUser={currentUser || null} />
+        )}
         <MobileBottomNav />
       </div>
     </AblyProvider>
